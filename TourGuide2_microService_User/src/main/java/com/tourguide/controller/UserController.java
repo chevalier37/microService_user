@@ -2,6 +2,7 @@ package com.tourguide.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,8 +40,14 @@ public class UserController {
 	// The reward points for visiting each Attraction.
 	// Note: Attraction reward points can be gathered from RewardsCentral
 
-	private User getUser(String userName) {
+	@GetMapping("/getUser/{userName}")
+	public User getUser(@PathVariable("userName") String userName) {
 		return userService.getUser(userName);
+	}
+
+	@GetMapping("/getUserLocation")
+	public VisitedLocation getUserLocation(@RequestParam String userName) {
+		return userService.getUserLocation(getUser(userName));
 	}
 
 }
