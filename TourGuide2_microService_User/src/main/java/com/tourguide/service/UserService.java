@@ -14,20 +14,28 @@ import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tourguide.helper.InternalTestHelper;
 import com.tourguide.model.Location;
 import com.tourguide.model.User;
 import com.tourguide.model.VisitedLocation;
+import com.tourguide.proxy.MicroServiceRewardProxy;
+import com.tourguide.tracker.Tracker;
 
 @Service
 public class UserService {
 
+	@Autowired
+	MicroServiceRewardProxy rewardProxy;
+
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
+	public final Tracker tracker;
 
 	public UserService() {
 		initializeInternalUsers();
+		tracker = new Tracker(this);
 	}
 
 	public User getUser(String userName) {
@@ -47,6 +55,13 @@ public class UserService {
 	public VisitedLocation getUserLocation(User user) {
 		VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ? user.getLastVisitedLocation()
 				: null;
+		return visitedLocation;
+	}
+
+	public VisitedLocation trackUserLocation(User user) {
+		VisitedLocation visitedLocation = getUserLocation(user);
+		user.addToVisitedLocations(visitedLocation);
+		rewardProxy.calculateRewards(user);
 		return visitedLocation;
 	}
 

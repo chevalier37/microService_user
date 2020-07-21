@@ -1,5 +1,7 @@
 package com.tourguide.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +50,11 @@ public class UserController {
 	@GetMapping("/getUserLocation")
 	public VisitedLocation getUserLocation(@RequestParam String userName) {
 		return userService.getUserLocation(getUser(userName));
+	}
+
+	@GetMapping("/getAllUsers")
+	public List<User> getAllUsers() {
+		return userService.getAllUsers();
 	}
 
 }
