@@ -54,7 +54,8 @@ public class UserService {
 
 	public VisitedLocation getUserLocation(User user) {
 		VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ? user.getLastVisitedLocation()
-				: null;
+				: new VisitedLocation(user.getUserId(),
+						new Location(generateRandomLatitude(), generateRandomLongitude()), getRandomTime());
 		return visitedLocation;
 	}
 

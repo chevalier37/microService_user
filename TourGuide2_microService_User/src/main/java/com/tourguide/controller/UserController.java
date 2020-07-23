@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,6 +57,12 @@ public class UserController {
 	@GetMapping("/getAllUsers")
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();
+	}
+
+	@PostMapping("/trackUserLocation")
+	public VisitedLocation trackUserLocation(@RequestBody User user) {
+		// utiliser userId
+		return userService.trackUserLocation(user);
 	}
 
 }
