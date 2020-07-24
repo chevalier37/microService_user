@@ -1,5 +1,7 @@
 package com.tourguide.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -19,10 +21,13 @@ import org.springframework.stereotype.Service;
 
 import com.tourguide.helper.InternalTestHelper;
 import com.tourguide.model.Location;
+import com.tourguide.model.Provider;
 import com.tourguide.model.User;
 import com.tourguide.model.VisitedLocation;
 import com.tourguide.proxy.MicroServiceRewardProxy;
 import com.tourguide.tracker.Tracker;
+
+import tripPricer.TripPricer;
 
 @Service
 public class UserService {
@@ -32,6 +37,7 @@ public class UserService {
 
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	public final Tracker tracker;
+	private final TripPricer tripPricer = new TripPricer();
 
 	public UserService() {
 		initializeInternalUsers();
@@ -64,6 +70,20 @@ public class UserService {
 		user.addToVisitedLocations(visitedLocation);
 		rewardProxy.calculateRewards(user);
 		return visitedLocation;
+	}
+
+	public List<Provider> getTripDeals(User user) {
+		int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
+
+		List<tripPricer.Provider> tripPricerProviders = tripPricer.getPrice(tripPricerApiKey, user.getUserId(),
+				user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),
+				user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
+
+		List<Provider> modelProviders = tripPricerProviders.stream()
+				.map(provider -> new Provider(provider.tripId, provider.name, provider.price)).collect(toList());
+
+		user.setTripDeals(modelProviders);
+		return modelProviders;
 	}
 
 	private static final String tripPricerApiKey = "test-server-api-key";

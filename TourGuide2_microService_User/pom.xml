@@ -77,6 +77,13 @@
 		    <artifactId>jacoco-maven-plugin</artifactId>
 		    <version>0.8.5</version>
 		</dependency>
+		<dependency>
+	      <groupId>TripPricer</groupId>  
+	       <artifactId>com.TripPricer</artifactId>  
+	       <version>1.0</version> 
+	      <scope>system</scope>
+	      <systemPath>${project.basedir}/libs/TripPricer.jar</systemPath>
+		</dependency>
 				
 	</dependencies>
 	

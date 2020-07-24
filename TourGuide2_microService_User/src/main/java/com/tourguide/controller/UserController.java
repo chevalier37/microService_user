@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jsoniter.output.JsonStream;
+import com.tourguide.model.Provider;
 import com.tourguide.model.User;
 import com.tourguide.model.VisitedLocation;
 import com.tourguide.service.UserService;
@@ -59,10 +58,16 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 
-	@PostMapping("/trackUserLocation")
-	public VisitedLocation trackUserLocation(@RequestBody User user) {
-		// utiliser userId
+	@GetMapping("/trackUserLocation/{userName}")
+	public VisitedLocation trackUserLocation(@PathVariable("userName") String userName) {
+		User user = userService.getUser(userName);
 		return userService.trackUserLocation(user);
+	}
+
+	@GetMapping("/getTripDeals/{userName}")
+	public List<Provider> getTripDeals(@PathVariable("userName") String userName) {
+		User user = userService.getUser(userName);
+		return userService.getTripDeals(user);
 	}
 
 }
