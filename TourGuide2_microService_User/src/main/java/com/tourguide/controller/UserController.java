@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jsoniter.output.JsonStream;
+import com.tourguide.model.Location;
 import com.tourguide.model.Provider;
 import com.tourguide.model.User;
 import com.tourguide.model.VisitedLocation;
@@ -26,22 +26,10 @@ public class UserController {
 	}
 
 	@GetMapping("/getLocation")
-	public String getLocation(@RequestParam String userName) {
+	public Location getLocation(@RequestParam String userName) {
 		VisitedLocation visitedLocation = userService.getUserLocation(getUser(userName));
-		return JsonStream.serialize(visitedLocation.location);
+		return visitedLocation.location;
 	}
-
-	// TODO: Change this method to no longer return a List of Attractions.
-	// Instead: Get the closest five tourist attractions to the user - no matter how
-	// far away they are.
-	// Return a new JSON object that contains:
-	// Name of Tourist attraction,
-	// Tourist attractions lat/long,
-	// The user's location lat/long,
-	// The distance in miles between the user's location and each of the
-	// attractions.
-	// The reward points for visiting each Attraction.
-	// Note: Attraction reward points can be gathered from RewardsCentral
 
 	@GetMapping("/getUser/{userName}")
 	public User getUser(@PathVariable("userName") String userName) {

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.tourguide.helper.InternalTestHelper;
+import com.tourguide.model.Provider;
 import com.tourguide.model.User;
 import com.tourguide.model.VisitedLocation;
 import com.tourguide.service.UserService;
@@ -22,12 +22,16 @@ public class UserTest {
 	UserService userService;
 
 	@Test
-	public void getUserLocation() {
-		UserService userService = new UserService();
-		InternalTestHelper.setInternalUserNumber(0);
-		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
-		VisitedLocation visitedLocation = userService.trackUserLocation(user);
+	public void getUserTest() {
+		User user = userService.getUser("internalUser1");
+		assertTrue(user.getUserName().equals("internalUser1"));
 
+	}
+
+	@Test
+	public void getUserLocation() {
+		User user = userService.getUser("internalUser1");
+		VisitedLocation visitedLocation = userService.trackUserLocation(user);
 		userService.tracker.stopTracking();
 		assertTrue(visitedLocation.userId.equals(user.getUserId()));
 
@@ -36,7 +40,6 @@ public class UserTest {
 	@Test
 	public void addUser() {
 		UserService userService = new UserService();
-
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		User user2 = new User(UUID.randomUUID(), "jon2", "000", "jon2@tourGuide.com");
 
@@ -80,6 +83,13 @@ public class UserTest {
 		userService.tracker.stopTracking();
 
 		assertEquals(user.getUserId(), visitedLocation.userId);
+	}
+
+	@Test
+	public void getTripDeals() {
+		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
+		List<Provider> providers = userService.getTripDeals(user);
+		assertEquals(5, providers.size());
 	}
 
 }

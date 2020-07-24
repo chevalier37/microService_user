@@ -68,7 +68,7 @@ public class UserService {
 	public VisitedLocation trackUserLocation(User user) {
 		VisitedLocation visitedLocation = getUserLocation(user);
 		user.addToVisitedLocations(visitedLocation);
-		rewardProxy.calculateRewards(user);
+		// rewardProxy.calculateRewards(user.getUserName());
 		return visitedLocation;
 	}
 
