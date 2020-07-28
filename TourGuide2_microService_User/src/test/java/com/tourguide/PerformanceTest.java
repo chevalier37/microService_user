@@ -37,7 +37,6 @@ public class PerformanceTest {
 	@Autowired
 	MicroServiceGpsProxy gpsProxy;
 
-	@Test
 	public void highVolumeTrackLocation() {
 
 		List<User> allUsers = userService.getAllUsers();
@@ -58,6 +57,7 @@ public class PerformanceTest {
 
 	}
 
+	@Test
 	public void highVolumeGetRewards() {
 
 		StopWatch stopWatch = new StopWatch();
@@ -78,7 +78,7 @@ public class PerformanceTest {
 			assertTrue(user.getUserRewards().size() > 0);
 		}
 		stopWatch.stop();
-		userService.tracker.stopTracking();
+		// userService.tracker.stopTracking();
 
 		logger.info("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime())
 				+ " seconds. + size " + allUsers.size());
