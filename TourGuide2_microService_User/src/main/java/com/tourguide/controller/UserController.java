@@ -1,6 +1,7 @@
 package com.tourguide.controller;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +48,7 @@ public class UserController {
 	}
 
 	@GetMapping("/trackUserLocation/{userName}")
-	public VisitedLocation trackUserLocation(@PathVariable("userName") String userName) {
+	public CompletableFuture<VisitedLocation> trackUserLocation(@PathVariable("userName") String userName) {
 		User user = userService.getUser(userName);
 		return userService.trackUserLocation(user);
 	}
@@ -56,6 +57,12 @@ public class UserController {
 	public List<Provider> getTripDeals(@PathVariable("userName") String userName) {
 		User user = userService.getUser(userName);
 		return userService.getTripDeals(user);
+	}
+
+	@GetMapping("/addUserReward/{userName}")
+	public void addUserReward(@PathVariable("userName") String userName) {
+		User user = userService.getUser(userName);
+		userService.addUserReward(user);
 	}
 
 }

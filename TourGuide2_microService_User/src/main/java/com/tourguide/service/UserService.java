@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,12 +18,14 @@ import java.util.stream.IntStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.tourguide.helper.InternalTestHelper;
 import com.tourguide.model.Location;
 import com.tourguide.model.Provider;
 import com.tourguide.model.User;
+import com.tourguide.model.UserReward;
 import com.tourguide.model.VisitedLocation;
 import com.tourguide.proxy.MicroServiceRewardProxy;
 import com.tourguide.tracker.Tracker;
@@ -58,6 +61,13 @@ public class UserService {
 		}
 	}
 
+	public void addUserReward(User user) {
+		User userGet = getUser(user.getUserName());
+		for (UserReward userReward : user.getUserRewards()) {
+			userGet.addUserReward(userReward);
+		}
+	}
+
 	public VisitedLocation getUserLocation(User user) {
 		VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ? user.getLastVisitedLocation()
 				: new VisitedLocation(user.getUserId(),
@@ -65,11 +75,12 @@ public class UserService {
 		return visitedLocation;
 	}
 
-	public VisitedLocation trackUserLocation(User user) {
+	@Async("asyncExecutor")
+	public CompletableFuture<VisitedLocation> trackUserLocation(User user) {
 		VisitedLocation visitedLocation = getUserLocation(user);
 		user.addToVisitedLocations(visitedLocation);
-		// rewardProxy.calculateRewards(user.getUserName());
-		return visitedLocation;
+		rewardProxy.calculateRewards(user.getUserName());
+		return CompletableFuture.completedFuture(visitedLocation);
 	}
 
 	public List<Provider> getTripDeals(User user) {
@@ -103,9 +114,6 @@ public class UserService {
 			String userName = "internalUser" + i;
 			String phone = "000";
 			String email = userName + "@tourGuide.com";
-			// created by JB
-			// UserPreferences userPreferences = new UserPreferences(nbrNight, nbrTicket,
-			// nbrAdult, nbrChild);
 			User user = new User(UUID.randomUUID(), userName, phone, email);
 			generateUserLocationHistory(user);
 
