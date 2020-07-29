@@ -65,4 +65,10 @@ public class UserControllerTest {
 				.andDo(print()).andExpect(status().isOk());
 	}
 
+	@Test
+	public void getAllCurrentLocations() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/getAllCurrentLocations")).andDo(print())
+				.andExpect(status().isOk());
+	}
+
 }

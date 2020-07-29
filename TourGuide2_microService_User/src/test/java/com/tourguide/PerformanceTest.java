@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -37,6 +36,7 @@ public class PerformanceTest {
 	@Autowired
 	MicroServiceGpsProxy gpsProxy;
 
+	@Test
 	public void highVolumeTrackLocation() {
 
 		List<User> allUsers = userService.getAllUsers();
@@ -44,11 +44,9 @@ public class PerformanceTest {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		for (User user : allUsers) {
-			CompletableFuture<VisitedLocation> visitedLocation = userService.trackUserLocation(user);
-			CompletableFuture.allOf(visitedLocation).join();
+			userService.trackUserLocation(user);
 		}
 		stopWatch.stop();
-		// userService.tracker.stopTracking();
 
 		logger.info("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime())
 				+ " seconds. + size " + allUsers.size());
@@ -78,7 +76,6 @@ public class PerformanceTest {
 			assertTrue(user.getUserRewards().size() > 0);
 		}
 		stopWatch.stop();
-		// userService.tracker.stopTracking();
 
 		logger.info("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime())
 				+ " seconds. + size " + allUsers.size());

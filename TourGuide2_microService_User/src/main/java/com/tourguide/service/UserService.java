@@ -1,7 +1,5 @@
 package com.tourguide.service;
 
-import static java.util.stream.Collectors.toList;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -10,15 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.tourguide.helper.InternalTestHelper;
@@ -27,10 +23,10 @@ import com.tourguide.model.Provider;
 import com.tourguide.model.User;
 import com.tourguide.model.UserReward;
 import com.tourguide.model.VisitedLocation;
+import com.tourguide.proxy.MicroServiceGpsProxy;
 import com.tourguide.proxy.MicroServiceRewardProxy;
 import com.tourguide.tracker.Tracker;
-
-import tripPricer.TripPricer;
+import com.tourguide.tripPricer.TripPricer;
 
 @Service
 public class UserService {
@@ -38,7 +34,10 @@ public class UserService {
 	@Autowired
 	MicroServiceRewardProxy rewardProxy;
 
-	private Logger logger = LoggerFactory.getLogger(UserService.class);
+	@Autowired
+	MicroServiceGpsProxy gpsProxy;
+
+	private static final Logger logger = LogManager.getRootLogger();
 	public final Tracker tracker;
 	private final TripPricer tripPricer = new TripPricer();
 
@@ -74,26 +73,38 @@ public class UserService {
 						new Location(generateRandomLatitude(), generateRandomLongitude()), getRandomTime());
 	}
 
-	@Async("asyncExecutor")
-	public CompletableFuture<VisitedLocation> trackUserLocation(User user) {
+	public VisitedLocation trackUserLocation(User user) {
 		VisitedLocation visitedLocation = getUserLocation(user);
 		user.addToVisitedLocations(visitedLocation);
 		rewardProxy.calculateRewards(user.getUserName());
-		return CompletableFuture.completedFuture(visitedLocation);
+		return visitedLocation;
 	}
 
 	public List<Provider> getTripDeals(User user) {
 		int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 
-		List<tripPricer.Provider> tripPricerProviders = tripPricer.getPrice(tripPricerApiKey, user.getUserId(),
+		List<Provider> Providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(),
 				user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),
 				user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
 
-		List<Provider> modelProviders = tripPricerProviders.stream()
-				.map(provider -> new Provider(provider.tripId, provider.name, provider.price)).collect(toList());
+		/*
+		 * List<Provider> modelProviders = tripPricerProviders.stream() .map(provider ->
+		 * new Provider(provider.tripId, provider.name,
+		 * provider.price)).collect(toList());
+		 */
 
-		user.setTripDeals(modelProviders);
-		return modelProviders;
+		user.setTripDeals(Providers);
+		return Providers;
+	}
+
+	public Map<String, Location> getAllCurrentLocations() {
+		List<User> getAllUsers = getAllUsers();
+		Map<String, Location> locations = new HashMap<>();
+		for (User user : getAllUsers) {
+			VisitedLocation visitedLocation = getUserLocation(getUser(user.getUserName()));
+			locations.put(user.getUserId().toString(), visitedLocation.location);
+		}
+		return locations;
 	}
 
 	private static final String tripPricerApiKey = "test-server-api-key";

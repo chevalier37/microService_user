@@ -4,22 +4,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.tourguide.helper.InternalTestHelper;
+import com.tourguide.model.Location;
 import com.tourguide.model.Provider;
 import com.tourguide.model.User;
 import com.tourguide.model.VisitedLocation;
+import com.tourguide.proxy.MicroServiceGpsProxy;
+import com.tourguide.proxy.MicroServiceRewardProxy;
 import com.tourguide.service.UserService;
 
 @SpringBootTest
 public class UserTest {
 
+	private static final Logger logger = LogManager.getRootLogger();
+
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	MicroServiceRewardProxy rewardProxy;
+
+	@Autowired
+	MicroServiceGpsProxy gpsProxy;
 
 	@Test
 	public void getUserTest() {
@@ -75,11 +90,8 @@ public class UserTest {
 
 	@Test
 	public void trackUser() {
-		UserService userService = new UserService();
-
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		VisitedLocation visitedLocation = userService.trackUserLocation(user);
-
 		userService.tracker.stopTracking();
 
 		assertEquals(user.getUserId(), visitedLocation.userId);
@@ -90,6 +102,13 @@ public class UserTest {
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		List<Provider> providers = userService.getTripDeals(user);
 		assertEquals(5, providers.size());
+	}
+
+	@Test
+	public void getAllCurrentLocations() {
+		Map<String, Location> getAllCurrentLocations = userService.getAllCurrentLocations();
+		int users = InternalTestHelper.getInternalUserNumber();
+		assertEquals(users, getAllCurrentLocations.size());
 	}
 
 }
