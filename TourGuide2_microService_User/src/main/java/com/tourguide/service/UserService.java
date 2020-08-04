@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -102,18 +101,12 @@ public class UserService {
 	}
 
 	private static final String tripPricerApiKey = "test-server-api-key";
-	// Database connection will be used for external users, but for testing purposes
-	// internal users are provided and stored in memory
+
 	private final Map<String, User> internalUserMap = new HashMap<>();
 
 	private void initializeInternalUsers() {
 
 		IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -> {
-			// created by JB
-			int nbrAdult = ThreadLocalRandom.current().nextInt(1, 4);
-			int nbrChild = ThreadLocalRandom.current().nextInt(1, 4);
-			int nbrNight = ThreadLocalRandom.current().nextInt(1, 15);
-			int nbrTicket = ThreadLocalRandom.current().nextInt(1, 4);
 
 			String userName = "internalUser" + i;
 			String phone = "000";

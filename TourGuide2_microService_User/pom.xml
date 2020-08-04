@@ -89,10 +89,10 @@
 		</dependency>
 		<dependency>
 	      <groupId>TripPricer</groupId>  
-	       <artifactId>com.TripPricer</artifactId>  
+	       <artifactId>TripPricer</artifactId>  
 	       <version>1.0</version> 
 	      <scope>system</scope>
-	      <systemPath>${project.basedir}/libs/TripPricer.jar</systemPath>
+	      <systemPath>${basedir}/libs/TripPricer.jar</systemPath>
 		</dependency>
 				
 	</dependencies>

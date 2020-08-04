@@ -1,17 +1,20 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
 
-# Refer to Maven build -> finalName
-# Faire d'abord : mvn package pour créer le jar, puis mettre le nom du jar ici
-ARG JAR_FILE=target/TourGuide2_microService_User-0.0.1-SNAPSHOT.jar
+MAINTAINER JB ROUSSAT
 
-#ENV PORT 9002
-#EXPOSE 9002
+COPY pom.xml /build/
 
-# cd /opt/app
-WORKDIR /opt/app
+COPY src /build/src/
 
-# cp target/spring-boot-web.jar /opt/app/app.jar
-COPY ${JAR_FILE} app.jar
+WORKDIR /build/
 
-# java -jar /opt/app/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+RUN mvn clean package spring-boot:repackage  -Dmaven.test.skip=true
+
+FROM openjdk:8-jre-alpine
+
+
+WORKDIR /app
+
+COPY --from=MAVEN_BUILD /build/target/TourGuide2_microService_User-0.0.1-SNAPSHOT.jar /app/
+
+ENTRYPOINT ["java", "-jar", "TourGuide2_microService_Zuul-0.0.1-SNAPSHOT.jar"]

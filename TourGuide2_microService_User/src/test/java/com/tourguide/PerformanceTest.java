@@ -57,7 +57,6 @@ public class PerformanceTest {
 
 	}
 
-	@Ignore
 	@Test
 	public void highVolumeGetRewards() {
 

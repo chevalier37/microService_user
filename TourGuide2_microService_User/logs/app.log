@@ -1,2 +1,59 @@
-2020-08-04 07:28:08,527 [AsyncResolver-bootstrap-executor-0] INFO com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2020-08-04 07:33:08,552 [AsyncResolver-bootstrap-executor-0] INFO com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-08-04 10:15:56,388 [restartedMain] INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-08-04 10:15:56,835 [restartedMain] INFO com.tourguide.TourGuide2MicroServiceUserApplication - No active profile set, falling back to default profiles: default
+2020-08-04 10:15:58,181 [restartedMain] INFO org.springframework.cloud.context.scope.GenericScope - BeanFactory id=dbe57945-81f8-3b4f-b082-10b8978cd087
+2020-08-04 10:15:58,300 [restartedMain] INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.tourguide.proxy.MicroServiceGpsProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-08-04 10:15:58,311 [restartedMain] INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.tourguide.proxy.MicroServiceRewardProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-08-04 10:15:59,076 [restartedMain] INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9002 (http)
+2020-08-04 10:15:59,099 [restartedMain] INFO org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9002"]
+2020-08-04 10:15:59,100 [restartedMain] INFO org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-08-04 10:15:59,102 [restartedMain] INFO org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-08-04 10:15:59,545 [restartedMain] INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-08-04 10:15:59,546 [restartedMain] INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2677 ms
+2020-08-04 10:15:59,648 [restartedMain] INFO org.javamoney.moneta.DefaultMonetaryContextFactory - Using custom MathContext: precision=256, roundingMode=HALF_EVEN
+2020-08-04 10:15:59,940 [restartedMain] INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2020-08-04 10:16:00,208 [restartedMain] WARN com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-08-04 10:16:00,209 [restartedMain] INFO com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-08-04 10:16:00,217 [restartedMain] WARN com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-08-04 10:16:00,217 [restartedMain] INFO com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-08-04 10:16:00,567 [restartedMain] INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-04 10:16:00,926 [restartedMain] WARN org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-08-04 10:16:01,134 [restartedMain] INFO org.springframework.cloud.netflix.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-08-04 10:16:01,269 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2020-08-04 10:16:01,737 [restartedMain] INFO com.netflix.discovery.provider.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2020-08-04 10:16:01,737 [restartedMain] INFO com.netflix.discovery.provider.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2020-08-04 10:16:02,065 [restartedMain] INFO com.netflix.discovery.provider.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2020-08-04 10:16:02,065 [restartedMain] INFO com.netflix.discovery.provider.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2020-08-04 10:16:02,637 [restartedMain] INFO com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-08-04 10:16:02,684 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Disable delta property : false
+2020-08-04 10:16:02,709 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2020-08-04 10:16:02,709 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2020-08-04 10:16:02,709 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Application is null : false
+2020-08-04 10:16:02,709 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2020-08-04 10:16:02,709 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Application version is -1: true
+2020-08-04 10:16:02,713 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2020-08-04 10:16:03,404 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - The response status is 200
+2020-08-04 10:16:03,409 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2020-08-04 10:16:03,412 [restartedMain] INFO com.netflix.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2020-08-04 10:16:03,419 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1596528963418 with initial instances count: 2
+2020-08-04 10:16:03,426 [restartedMain] INFO org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry - Registering application MICROSERVICE-USER with eureka with status UP
+2020-08-04 10:16:03,427 [restartedMain] INFO com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1596528963427, current=UP, previous=STARTING]
+2020-08-04 10:16:03,431 [DiscoveryClient-InstanceInfoReplicator-0] INFO com.netflix.discovery.DiscoveryClient - DiscoveryClient_MICROSERVICE-USER/macbook-pro:microservice-user:9002: registering service...
+2020-08-04 10:16:03,485 [restartedMain] INFO org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9002"]
+2020-08-04 10:16:03,593 [DiscoveryClient-InstanceInfoReplicator-0] INFO com.netflix.discovery.DiscoveryClient - DiscoveryClient_MICROSERVICE-USER/macbook-pro:microservice-user:9002 - registration status: 204
+2020-08-04 10:16:03,611 [restartedMain] INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 9002 (http) with context path ''
+2020-08-04 10:16:03,613 [restartedMain] INFO org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration - Updating port to 9002
+2020-08-04 10:16:03,637 [restartedMain] INFO com.tourguide.TourGuide2MicroServiceUserApplication - Started TourGuide2MicroServiceUserApplication in 7.978 seconds (JVM running for 11.378)
+2020-08-04 10:16:05,485 [RMI TCP Connection(2)-127.0.0.1] INFO org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2020-08-04 10:16:05,487 [RMI TCP Connection(2)-127.0.0.1] INFO org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry - Unregistering application MICROSERVICE-USER with eureka with status DOWN
+2020-08-04 10:16:05,487 [RMI TCP Connection(2)-127.0.0.1] WARN com.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1596528965487, current=DOWN, previous=UP]
+2020-08-04 10:16:05,487 [DiscoveryClient-InstanceInfoReplicator-0] INFO com.netflix.discovery.DiscoveryClient - DiscoveryClient_MICROSERVICE-USER/macbook-pro:microservice-user:9002: registering service...
+2020-08-04 10:16:05,494 [RMI TCP Connection(2)-127.0.0.1] INFO org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-9002"]
+2020-08-04 10:16:05,503 [RMI TCP Connection(2)-127.0.0.1] INFO org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2020-08-04 10:16:05,518 [RMI TCP Connection(2)-127.0.0.1] INFO org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-9002"]
+2020-08-04 10:16:05,548 [RMI TCP Connection(2)-127.0.0.1] INFO org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-9002"]
+2020-08-04 10:16:05,555 [RMI TCP Connection(2)-127.0.0.1] INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-08-04 10:16:05,566 [RMI TCP Connection(2)-127.0.0.1] INFO com.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2020-08-04 10:16:05,569 [DiscoveryClient-InstanceInfoReplicator-0] INFO com.netflix.discovery.DiscoveryClient - DiscoveryClient_MICROSERVICE-USER/macbook-pro:microservice-user:9002 - registration status: 204
+2020-08-04 10:16:05,572 [RMI TCP Connection(2)-127.0.0.1] INFO com.netflix.discovery.DiscoveryClient - Unregistering ...
+2020-08-04 10:16:05,583 [RMI TCP Connection(2)-127.0.0.1] INFO com.netflix.discovery.DiscoveryClient - DiscoveryClient_MICROSERVICE-USER/macbook-pro:microservice-user:9002 - deregister  status: 200
+2020-08-04 10:16:05,601 [RMI TCP Connection(2)-127.0.0.1] INFO com.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
