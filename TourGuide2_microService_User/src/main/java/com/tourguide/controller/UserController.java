@@ -6,12 +6,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tourguide.model.Location;
 import com.tourguide.model.Provider;
 import com.tourguide.model.User;
+import com.tourguide.model.UserPreferences;
+import com.tourguide.model.UserReward;
 import com.tourguide.model.VisitedLocation;
 import com.tourguide.service.UserService;
 
@@ -59,15 +64,24 @@ public class UserController {
 		return userService.getTripDeals(user);
 	}
 
-	@GetMapping("/addUserReward/{userName}")
-	public void addUserReward(@PathVariable("userName") String userName) {
+	@PostMapping("/addUserReward/{userName}")
+	public void addUserReward(@PathVariable("userName") String userName, @RequestBody List<UserReward> userRewards) {
 		User user = userService.getUser(userName);
-		userService.addUserReward(user);
+		for (UserReward reward : userRewards) {
+			user.addUserReward(reward);
+		}
 	}
 
 	@GetMapping("/getAllCurrentLocations")
 	public Map<String, Location> getAllCurrentLocations() {
 		return userService.getAllCurrentLocations();
+	}
+
+	@PutMapping("setUsernbrAdult/{userName}/{nbrAdult}")
+	public void setUserPreference(@PathVariable("userName") String userName, @PathVariable("nbrAdult") int nbrAdult) {
+		User user = userService.getUser(userName);
+		UserPreferences userPreference = user.getUserPreferences();
+		userPreference.setNumberOfAdults(nbrAdult);
 	}
 
 }

@@ -87,12 +87,6 @@ public class UserService {
 				user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),
 				user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
 
-		/*
-		 * List<Provider> modelProviders = tripPricerProviders.stream() .map(provider ->
-		 * new Provider(provider.tripId, provider.name,
-		 * provider.price)).collect(toList());
-		 */
-
 		user.setTripDeals(Providers);
 		return Providers;
 	}

@@ -5,9 +5,8 @@ import javax.money.Monetary;
 
 import org.javamoney.moneta.Money;
 
-
 public class UserPreferences {
-	
+
 	private int attractionProximity = Integer.MAX_VALUE;
 	private CurrencyUnit currency = Monetary.getCurrency("USD");
 	private Money lowerPricePoint = Money.of(0, currency);
@@ -16,30 +15,29 @@ public class UserPreferences {
 	private int ticketQuantity = 1;
 	private int numberOfAdults = 1;
 	private int numberOfChildren = 0;
-	/*private int tripDuration;
-	private int ticketQuantity;
-	private int numberOfAdults;
-	private int numberOfChildren;*/
-	
-	
+	/*
+	 * private int tripDuration; private int ticketQuantity; private int
+	 * numberOfAdults; private int numberOfChildren;
+	 */
+
 	public UserPreferences() {
 	}
-	
-	/*public UserPreferences(int tripDuration, int ticketQuantity, int numberOfAdults, int numberOfChildren) {
-		this.tripDuration = tripDuration;
-		this.ticketQuantity = ticketQuantity;
-		this.numberOfAdults = numberOfAdults;
-		this.numberOfChildren = numberOfChildren;
-	}*/
+
+	/*
+	 * public UserPreferences(int tripDuration, int ticketQuantity, int
+	 * numberOfAdults, int numberOfChildren) { this.tripDuration = tripDuration;
+	 * this.ticketQuantity = ticketQuantity; this.numberOfAdults = numberOfAdults;
+	 * this.numberOfChildren = numberOfChildren; }
+	 */
 
 	public void setAttractionProximity(int attractionProximity) {
 		this.attractionProximity = attractionProximity;
 	}
-	
+
 	public int getAttractionProximity() {
 		return attractionProximity;
 	}
-	
+
 	public Money getLowerPricePoint() {
 		return lowerPricePoint;
 	}
@@ -55,7 +53,7 @@ public class UserPreferences {
 	public void setHighPricePoint(Money highPricePoint) {
 		this.highPricePoint = highPricePoint;
 	}
-	
+
 	public int getTripDuration() {
 		return tripDuration;
 	}
@@ -71,7 +69,7 @@ public class UserPreferences {
 	public void setTicketQuantity(int ticketQuantity) {
 		this.ticketQuantity = ticketQuantity;
 	}
-	
+
 	public int getNumberOfAdults() {
 		return numberOfAdults;
 	}
@@ -95,7 +93,5 @@ public class UserPreferences {
 				+ tripDuration + ", ticketQuantity=" + ticketQuantity + ", numberOfAdults=" + numberOfAdults
 				+ ", numberOfChildren=" + numberOfChildren + "]";
 	}
-	
-	
 
 }

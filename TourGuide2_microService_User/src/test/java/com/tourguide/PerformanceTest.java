@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +37,7 @@ public class PerformanceTest {
 	@Autowired
 	MicroServiceGpsProxy gpsProxy;
 
+	@Ignore
 	@Test
 	public void highVolumeTrackLocation() {
 
@@ -55,6 +57,7 @@ public class PerformanceTest {
 
 	}
 
+	@Ignore
 	@Test
 	public void highVolumeGetRewards() {
 
