@@ -12,7 +12,7 @@ import com.tourguide.model.Attraction;
 @RibbonClient(name = "microservice-gpsUtil")
 public interface MicroServiceGpsProxy {
 
-	@GetMapping("/getAttractions")
+	@GetMapping("gpsutil//getAttractions")
 	List<Attraction> getAttractions();
 
 }

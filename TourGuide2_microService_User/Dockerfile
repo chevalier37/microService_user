@@ -5,6 +5,7 @@ MAINTAINER JB ROUSSAT
 COPY pom.xml /build/
 
 COPY src /build/src/
+COPY libs /build/libs/
 
 WORKDIR /build/
 
@@ -17,4 +18,4 @@ WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/TourGuide2_microService_User-0.0.1-SNAPSHOT.jar /app/
 
-ENTRYPOINT ["java", "-jar", "TourGuide2_microService_Zuul-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "TourGuide2_microService_User-0.0.1-SNAPSHOT.jar"]

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RibbonClient(name = "microservice-reward")
 public interface MicroServiceRewardProxy {
 
-	@GetMapping("/calculateRewards/{userName}")
+	@GetMapping("rewards/calculateRewards/{userName}")
 	void calculateRewards(@PathVariable("userName") String userName);
 
 }
