@@ -36,39 +36,45 @@ public class UserControllerTest {
 
 	@Test
 	public void getUser() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/getUser/internalUser1")).andDo(print())
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/user/getUser/internalUser1")).andDo(print())
 				.andExpect(status().isOk());
 	}
 
 	@Test
 	public void getUserLocation() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/getUserLocation").param("userName", "internalUser1"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/user/getUserLocation").param("userName", "internalUser1"))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void getAllUsers() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/getAllUsers")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/user/getAllUsers")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void trackUserLocation() throws Exception {
 		this.mockMvc.perform(
-				MockMvcRequestBuilders.get("/trackUserLocation/internalUser1").param("userName", "internalUser1"))
+				MockMvcRequestBuilders.get("/user/trackUserLocation/internalUser1").param("userName", "internalUser1"))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void getTripDeals() throws Exception {
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/getTripDeals/internalUser1").param("userName", "internalUser1"))
+		this.mockMvc.perform(
+				MockMvcRequestBuilders.get("/user/getTripDeals/internalUser1").param("userName", "internalUser1"))
 				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	public void getAllCurrentLocations() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/getAllCurrentLocations")).andDo(print())
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/user/getAllCurrentLocations")).andDo(print())
 				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void getLocation() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/user/getLocation").param("userName", "internalUser1"))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 }
